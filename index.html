@@ -1253,7 +1253,6 @@ function enterSite() {
   document.body.classList.remove('lock');
   setTimeout(() => welcome.remove(), 900);
   // Запускаем фоновую музыку (Web Audio) после клика
-  startBgMusic();
 }
 document.getElementById('wEnter').addEventListener('click', enterSite);
 nameIn.addEventListener('keydown', e => { if (e.key === 'Enter') enterSite(); });
