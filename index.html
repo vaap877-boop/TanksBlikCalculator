@@ -183,6 +183,7 @@
   <div class="tab-content" id="tab-checkers">
     <section class="card">
       <h2>Шашки</h2>
+      
       <div class="toolbar" style="justify-content: center; margin-bottom: 20px;">
         <button class="btn btn-primary" onclick="startOnlineGame()">🌐 Играть онлайн</button>
         <button class="btn btn-ghost" onclick="startLocalGame()">👥 Локально</button>
@@ -195,14 +196,10 @@
       </div>
       
       <div class="toolbar" style="justify-content:center; margin-top:20px;">
-        <button class="btn btn-ghost" onclick="initCheckers()">Начать заново</button>
+        <button class="btn btn-primary" onclick="initCheckers()">Начать заново</button>
       </div>
     </section>
   </div>
-</div>
-
-<button class="anti-stress" id="antiStress">🍶</button>
-<button class="music-btn" id="musicBtn">🎵</button>
 
 <script>
 /* ============ ПРИВЕТСТВИЕ И ИНИЦИАЛИЗАЦИЯ ============ */
@@ -240,6 +237,7 @@ function addBattle() {
 }
 
 /* ============ ЛОГИКА ШАШЕК (ОНЛАЙН + ИИ + ЛОКАЛКА) ============ */
+/* ============ ШАШКИ (ОНЛАЙН + ИИ + ЛОКАЛКА) ============ */
 let socket = null;
 let myColor = null;
 let currentRoomId = null;
@@ -444,11 +442,7 @@ function makeAIMove() {
     renderCheckers();
 }
 
-// Инициализация
+// Инициализация шашек при загрузке
 window.addEventListener('DOMContentLoaded', () => {
    initCheckers();
-   renderCalc();
 });
-</script>
-</body>
-</html>
