@@ -1714,7 +1714,7 @@ renderLinks();
 render();
 updateGameStats();
 initCheckers();
-<script>
+
 /* ============ МУЗЫКА (ФИКС) ============ */
 let bgMusicPlaying = false;
 let audioSource = null;
@@ -1737,9 +1737,9 @@ function playCustomMusic() {
     if (videoInfo) {
         document.getElementById('ytPlayerContainer').style.display = 'block';
         if (videoInfo.type === 'youtube') {
-            document.getElementById('ytPlayer').innerHTML = `<iframe src="https://www.youtube.com/embed/${videoInfo.id}?autoplay=1&loop=1&playlist=${videoInfo.id}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            document.getElementById('ytPlayer').innerHTML = `<iframe src="https://www.youtube.com/embed/${videoInfo.id}?autoplay=1&loop=1&playlist=${videoInfo.id}" allow="autoplay; encrypted-media" allowfullscreen style="width:100%; height:100%; border:none;"></iframe>`;
         } else if (videoInfo.type === 'vk') {
-            document.getElementById('ytPlayer').innerHTML = `<iframe src="https://vk.com/video_ext.php?oid=${videoInfo.oid}&id=${videoInfo.id}&hash=&hd=2" allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" frameborder="0" allowfullscreen></iframe>`;
+            document.getElementById('ytPlayer').innerHTML = `<iframe src="https://vk.com/video_ext.php?oid=${videoInfo.oid}&id=${videoInfo.id}&hash=&hd=2" allow="autoplay; encrypted-media; fullscreen;" style="width:100%; height:100%; border:none;"></iframe>`;
         }
     } else {
         try {
@@ -1747,7 +1747,7 @@ function playCustomMusic() {
             audioSource = new Audio(url);
             audioSource.loop = true;
             audioSource.volume = 0.5;
-            audioSource.play().catch(e => alert('Не удалось воспроизвести: ' + e.message));
+            audioSource.play().catch(e => alert('Ошибка: ' + e.message));
         } catch(e) {
             alert('Ошибка: ' + e.message);
         }
