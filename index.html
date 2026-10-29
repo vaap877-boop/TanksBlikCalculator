@@ -236,7 +236,7 @@ function addBattle() {
   }
 }
 
-/* ============ ЛОГИКА ШАШЕК (ОНЛАЙН + ИИ + ЛОКАЛКА) ============ */
+/* ============ ШАШКИ (ОНЛАЙН + ИИ + ЛОКАЛКА) ============ */
 /* ============ ШАШКИ (ОНЛАЙН + ИИ + ЛОКАЛКА) ============ */
 let socket = null;
 let myColor = null;
@@ -246,7 +246,7 @@ let checkersBoard = [];
 let selectedCell = null;
 let checkersTurn = 'white';
 
-// ТВОЯ ССЫЛКА С ЦИФРОЙ 1 (ИСПРАВЛЕНО)
+// ТВОЯ ССЫЛКА С ЦИФРОЙ 1
 const SERVER_URL = "https://server-checkers-r1te.onrender.com"; 
 
 function connectToServer() {
@@ -442,7 +442,7 @@ function makeAIMove() {
     renderCheckers();
 }
 
-// Инициализация шашек при загрузке
+// Инициализация при загрузке
 window.addEventListener('DOMContentLoaded', () => {
    initCheckers();
 });
