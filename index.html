@@ -1715,5 +1715,61 @@ render();
 updateGameStats();
 initCheckers();
 </script>
+  /* ============ МУЗЫКА (ФИКС) ============ */
+let bgMusicPlaying = false;
+let audioSource = null;
+
+function getVideoId(url) {
+    let match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/);
+    if (match) return { type: 'youtube', id: match[1] };
+    match = url.match(/(?:vk\.com|vkvideo\.ru)\/video(-?\d+)_(\d+)/);
+    if (match) return { type: 'vk', oid: match[1], id: match[2] };
+    return null;
+}
+
+function playCustomMusic() {
+    const url = document.getElementById('ytUrl').value.trim();
+    if (!url) return alert('Введи ссылку');
+    
+    stopCustomMusic();
+    const videoInfo = getVideoId(url);
+    
+    if (videoInfo) {
+        document.getElementById('ytPlayerContainer').style.display = 'block';
+        if (videoInfo.type === 'youtube') {
+            document.getElementById('ytPlayer').innerHTML = `<iframe src="https://www.youtube.com/embed/${videoInfo.id}?autoplay=1&loop=1&playlist=${videoInfo.id}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+        } else if (videoInfo.type === 'vk') {
+            document.getElementById('ytPlayer').innerHTML = `<iframe src="https://vk.com/video_ext.php?oid=${videoInfo.oid}&id=${videoInfo.id}&hash=&hd=2" allow="autoplay; encrypted-media; fullscreen; picture-in-picture;" frameborder="0" allowfullscreen></iframe>`;
+        }
+    } else {
+        try {
+            if (audioSource) audioSource.pause();
+            audioSource = new Audio(url);
+            audioSource.loop = true;
+            audioSource.volume = 0.5;
+            audioSource.play().catch(e => alert('Не удалось воспроизвести: ' + e.message));
+        } catch(e) {
+            alert('Ошибка: ' + e.message);
+        }
+    }
+    
+    document.getElementById('musicPanel').hidden = true;
+    document.getElementById('musicBtn').classList.add('playing');
+    document.getElementById('musicBtn').textContent = '🔇';
+}
+
+function stopCustomMusic() {
+    if (audioSource) { audioSource.pause(); audioSource = null; }
+    document.getElementById('ytPlayerContainer').style.display = 'none';
+    document.getElementById('ytPlayer').innerHTML = '';
+    document.getElementById('musicBtn').classList.remove('playing');
+    document.getElementById('musicBtn').textContent = '🎵';
+}
+
+document.getElementById('musicBtn').addEventListener('click', () => {
+    const panel = document.getElementById('musicPanel');
+    panel.hidden = !panel.hidden;
+    if (!panel.hidden) document.getElementById('ytUrl').focus();
+});
 </body>
 </html>
